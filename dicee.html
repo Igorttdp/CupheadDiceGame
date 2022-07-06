@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="pt-BR" dir="ltr">
+
+<head>
+  <!-- Metadata -->
+  <meta charset="utf-8">
+  <link rel="preload" as="image" href="assets/images/cupheadSoul.png">
+  <link rel="preload" as="image" href="assets/images/mugmanSoul.png">
+  <link rel="preload" as="image" href="assets/images/kingDiceDisappearing.gif">
+  <!-- <link rel="preload" as="image" href="assets/images/assets/images/kingDiceWon1.png">
+  <link rel="preload" as="image" href="assets/images/assets/images/kingDiceWon2.png"> -->
+  <title>The Dice Game</title>
+
+  <!-- StyleSheet -->
+  <link rel="stylesheet" href="assets/css/styles.css">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Alegreya+Sans+SC:ital,wght@0,100;0,300;0,400;0,500;0,700;0,800;0,900;1,100;1,300;1,400;1,500;1,700;1,800;1,900&display=swap"
+    rel="stylesheet">
+
+</head>
+
+<body>
+  <div class="kingDiceContainer">
+    <img id="kingDice" src="assets/images/kingDice.png" alt="Mr. King Dice">
+    <h1 id="title" class="winner"> <span class="front">T</span><span class="behind">he</span> <span
+        class="front">Dice</span><span class="front">Ga</span><span class="behind">me</span></h1>
+  </div>
+
+  <div class="scoreContainer">
+    <table class="tableScore">
+      <tr>
+        <th colspan="2">Score</th>
+      </tr>
+      <tr>
+        <td id="p1Score">0</td>
+        <td id="p2Score">0</td>
+      </tr>
+      <tr>
+        <td id="p1Name">Player 1</td>
+        <td id="p2Name">Player 2</td>
+      </tr>
+      <tr>
+        <td colspan="2">Remaining moves <br><span id="moves">0</span></td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="container">
+    <div id="cupheadContainer" class="characterContainer">
+      <img id="cuphead" class="character" src="assets/images/cuphead.png" alt="cuphead">
+    </div>
+    <div class="dice">
+      <div class="player">
+        <form id="p1Form" class="editPlayer" action="" method="get">
+          <input id="name1" type="text" placeholder="Player 1 name:" required>
+          <br>
+          <button class="done">Ok</button>
+          <br>
+        </form>
+        <div id="p1info">
+          <p id="p1Name">Player 1</p>
+          <span><img id="pencil1" class="pencil" src="assets/images/pencil.svg" alt="pencil"></span>
+          <img class="img1" src="assets/images/dice6.png">
+        </div>
+      </div>
+    </div>
+
+    <div class="dice">
+      <div class="player">
+        <form id="p2Form" class="editPlayer" action="" method="get">
+          <input id="name2" type="text" placeholder="Player 2 name:" required>
+          <br>
+          <button class="done">Ok</button>
+          <br>
+        </form>
+        <div id="p2info">
+          <p id="p2Name">Player 2</p>
+          <span><img id="pencil2" class="pencil" src="assets/images/pencil.svg" alt="pencil"></span>
+          <img class="img2" src="assets/images/dice6.png">
+        </div>
+      </div>
+    </div>
+    <div id="mugmanContainer" class="characterContainer">
+      <img id="mugman" class="character" src="assets/images/mugman.png" alt="Mugman">
+    </div>
+    <div id="explanation">
+      <div id="explanationBox">
+        <p>The rule is simple: Roll the dice. <br> The loser loses his soul... I meant, loses his soup</p>
+        <button title="Close" id="close" class="closeExplanation"><img id="closeImg" src="assets/images/closeBtn.png"
+            alt=""></button>
+      </div>
+      <div id="gamemodesContainer">
+        <button title="Close" id="close" class="closeGamemodes"><img id="closeImg" src="assets/images/closeBtn.png"
+            alt=""></button>
+        <button class="mode BO3">Best Of 3</button>
+        <button class="mode BO5">Best Of 5</button>
+        <button class="mode normal">Normal</button>
+        <p id="warning"></p>
+      </div>
+      <div class="interactBtns">
+        <button id="open">See Rules</button>
+        <button id="gamemodesBtn">Gamemodes</button>
+      </div>
+      <img id="kingDiceExplanation" src="assets/images/kingDice'sExplanation.png" alt="King Dice">
+    </div>
+  </div>
+  <div id="menu">
+    <button id="openMenuBtn"><img id="kingDiceHead" src="assets/images/kingDiceHead.png" alt="King Dice Head"></button>
+    <p>Open menu</p>
+  </div>
+  <div class="startBtn">
+    <button class="start selectGamemode">Select gamemode</button>
+    <button id="restart" class="start restart">Restart</button>
+  </div>
+
+  <script src="assets/js/index.js"></script>
+</body>
+
+</html>

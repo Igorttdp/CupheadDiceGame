@@ -1,0 +1,338 @@
+html {
+  background-image: linear-gradient(180deg, #000000 0%, #704989 100%);
+  height: 100vh;
+}
+
+body {
+  overflow: hidden;
+  margin: 0;
+  color: white;
+  font-family: 'Alegreya Sans SC', sans-serif;
+}
+
+h1 {
+  margin: 0;
+  position: relative;
+  text-shadow: 5px 0 #000000;
+  font-size: 8rem;
+}
+
+p {
+  font-size: 2rem;
+}
+
+footer {
+  margin-top: 5%;
+  color: #EEEEEE;
+  text-align: center;
+}
+
+#kingDice {
+  width: 65%;
+  position: relative;
+  z-index: 1;
+}
+
+.kingOpacity {
+  transition: all .3s;
+}
+
+.kingOpacity:hover {
+  opacity: 0.1;
+  transition: all .3s;
+}
+
+.kingDiceContainer {
+  max-width: 1200px;
+  padding-top: 20px;
+  margin: 0 auto;
+  height: 350px;
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  transition: all 2s;
+}
+
+#title {
+  position: relative;
+  bottom: 184px;
+}
+
+.behind {
+  position: relative;
+  z-index: -1;
+}
+
+.front {
+  position: relative;
+  top: 50px;
+  z-index: 2;
+}
+
+.front:nth-child(1) {
+  top: 20px;
+}
+
+.front:nth-child(4) {
+  top: 0;
+  z-index: 1;
+}
+
+.scoreContainer {
+  position: absolute;
+  left: 30px;
+  transform: translateX(-200%);
+  transition: all 2s;
+}
+
+table {
+  width: 300px;
+  transition: all 1s;
+}
+
+table, th, td {
+  font-size: 1.5rem;
+  border: 1px solid white;
+  text-align: center;
+  border-collapse: collapse;
+}
+
+#score {
+  padding: 0.5% 2%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  background-color: #321049;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  align-items: flex-end;
+  gap: 3em;
+}
+
+#p1info, #p2info {
+  display: flex;
+  flex-flow: column nowrap;
+}
+
+.character {
+  width: 120px;
+}
+
+.img1, .img2 {
+  width: 200px;
+}
+
+.dice {
+  text-align: center;
+  display: inline-block;
+}
+
+.startBtn {
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.start {
+  color: white;
+  cursor: pointer;
+  background-color: #2B1C35;
+  border: 1px transparent;
+  border-radius: 5px;
+  font-size: 30px;
+  font-style: italic;
+  padding: 0.5% 10%;
+  margin-top: 50px;
+  transition: all .3s;
+}
+
+.start:hover {
+  transform: scale(1.1);
+  transition: all .3s;
+}
+
+.start:nth-child(2) {
+  transition: all .5s;
+}
+
+.restart {
+  margin: 0;
+  position: relative;
+  z-index: -1;
+  transform: translateY(-100%);
+}
+
+.pencil {
+  width: 46px;
+  cursor: pointer;
+}
+
+.player p {
+  margin-bottom: 0;
+}
+
+.done {
+  color: white;
+  border: 1px solid white;
+  cursor: pointer;
+  font-size: 18px;
+  width: 46px;
+  margin-bottom: 10px;
+  margin-top: 25px;
+  background-color: #2B1C35;
+  border-radius: 5px;
+  padding: 5px 0;
+}
+
+input {
+  border-radius: 5px;
+  outline: 0;
+  font-size: 18px;
+  margin-top: 40px;
+}
+
+#p1Form, #p2Form {
+  display: none;
+}
+
+#explanation {
+  position: absolute;
+  right: 30px;
+  width: auto;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-end;
+  transition: all 3s;
+}
+
+#explanationBox {
+  display: none;
+  background-color: white;
+  color: #000000;
+  border: 1px solid #360542;
+  border-radius: 20px;
+  text-align: center;
+  width: 500px;
+  padding: 2%;
+}
+
+#explanationBox p {
+  font-size: 1.1rem;
+  margin: 0;
+}
+
+.interactBtns {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1em;
+  margin-top: 80px;
+}
+
+#open, #gamemodesBtn, .mode {
+  cursor: pointer;
+  width: auto;
+  min-width: 100px;
+  padding: 6%;
+  color: #fff;
+  background: #7e3da7;
+  font-weight: 600;
+  font-size: 1.1rem;
+  border: none;
+  border-radius: 10px;
+  transition: all .3s;
+}
+
+#open:hover, #gamemodesBtn:hover {
+  transform: scale(1.1);
+  transition: all .3s;
+}
+
+#close {
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 1.1rem;
+  border: none;
+  position: absolute;
+  left: 0px;
+  padding: 0;
+  background: transparent;
+}
+
+.closeExplanation {
+  top: 0px;
+}
+
+#closeImg {
+  width: 20px;
+}
+
+#gamemodesContainer {
+  display: none;
+  margin-top: 60px;
+  padding: 1em 0;
+  background-color: #2B1C35;
+  min-width: 200px;
+  border-radius: 20px;
+  flex-direction: column;
+  align-items: center;
+  gap: 1em;
+}
+
+.closeGamemodes {
+  top: 50px;
+  display: none;
+}
+
+.mode {
+  font-size: 1.05rem;
+}
+
+.active {
+  background: #3d40a7;
+  border: 1px solid;
+}
+
+#warning {
+  font-size: 1rem;
+  margin: 0;
+  color: red;
+}
+
+.roll {
+  background: #6c0199;
+  transition: all 3s;
+}
+
+#menu {
+  position: absolute;
+  bottom: 30px;
+  right: 30px;
+  text-align: center;
+  transform: translateX(200%);
+  transition: all 2s;
+}
+
+#menu p {
+  margin: 0;
+}
+
+#openMenuBtn {
+  cursor: pointer;
+  background: transparent;
+  border: none;
+}
+
+#kingDiceHead {
+  width: 100px;
+}
+
