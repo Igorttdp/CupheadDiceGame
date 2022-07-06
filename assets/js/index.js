@@ -7,16 +7,15 @@ function theDiceGame() {
     const mrKDice = document.querySelector('#kingDice');
     const title = document.querySelector('#title');
     const btnsDiv = document.querySelector('.interactBtns');
-    const mode = document.querySelectorAll('.mode')
+    const mode = document.querySelectorAll('.mode');
+    const refresh = document.querySelector('.refresh');
     const gamemodesBtn = document.querySelector('#gamemodesBtn');
     const gamemodesContainer = document.querySelector('#gamemodesContainer');
-    const warning = document.querySelector('#warning');
-    const closeGamemodesBtn = document.querySelector('.closeGamemodes');
     const openMenuDiv = document.querySelector('#menu');
     const menuBtn = document.querySelector('#openMenuBtn');
     const explanation = document.querySelector("#explanation")
     const openExplanation = document.querySelector("#open");
-    const closeExplanation = document.querySelector('.closeExplanation')
+    const closeExplanation = document.querySelector('.closeExplanation');
     const explanationBox = document.querySelector('#explanationBox');
     const kingDiceExplanation = document.querySelector('#kingDiceExplanation');
     const setP1Score = document.querySelector('#p1Score');
@@ -54,8 +53,8 @@ function theDiceGame() {
     }
 
     (function setScoreNames() {
-        const p1ScoreName = document.querySelector('#p1Name');
-        const p2ScoreName = document.querySelector('#p2Name');
+        const p1ScoreName = document.querySelector('#tableP1Name');
+        const p2ScoreName = document.querySelector('#TableP2Name');
         let name1 = document.querySelector('#name1').value;
         let name2 = document.querySelector('#name2').value
         if (name1 == '') {
@@ -79,6 +78,14 @@ function theDiceGame() {
         function closeGamemodes() {
             btnsDiv.style.display = 'flex';
             gamemodesContainer.style.display = 'none';
+        }
+
+        function reset() {
+            mode.forEach(e => e.style.display = 'none');
+            refresh.style.display = 'block';
+            refresh.onclick = () => {
+                location.reload();
+            }
         }
 
         function delayAnimation() {
@@ -379,276 +386,243 @@ function theDiceGame() {
             el = e.target;
 
             if (el.classList.contains('BO3')) {
-                if (el.classList.contains('active')) {
-                    warning.innerText = 'BO3 already selected';
-                    closeGamemodesBtn.style.display = 'block';
-                    closeGamemodesBtn.addEventListener('click', () => {
-                        closeGamemodes();
-                        warning.innerText = '';
-                    })
-                } else {
-                    mode.forEach(e => e.classList.remove('active'));
-                    el.classList.add('active');
-                    el.classList.add('clicked');
-                    setTimeout(() => {
-                        closeGamemodes();
-                        menuInteraction();
-                        showScore();
-                    }, 1000);
-                    bestOf3();
-                }
+                el.classList.add('active');
+                setTimeout(() => {
+                    closeGamemodes();
+                    menuInteraction();
+                    showScore();
+                    reset();
+                }, 1000);
+                bestOf3();
             }
 
             if (el.classList.contains('BO5')) {
-                if (el.classList.contains('active')) {
-                    warning.innerText = 'BO5 already selected';
-                    closeGamemodesBtn.style.display = 'block';
-                    closeGamemodesBtn.addEventListener('click', () => {
-                        closeGamemodes();
-                        warning.innerText = '';
-                    })
-                } else {
-                    mode.forEach(e => e.classList.remove('active'));
-                    el.classList.add('active');
-                    el.classList.add('clicked');
-                    setTimeout(() => {
-                        closeGamemodes();
-                        menuInteraction();
-                        showScore();
-                    }, 1000)
-                    bestOf5();
-                }
+                el.classList.add('active');
+                setTimeout(() => {
+                    closeGamemodes();
+                    menuInteraction();
+                    showScore();
+                    reset();
+                }, 1000)
+                bestOf5();
             }
 
             if (el.classList.contains('normal')) {
-                el = e.target
+                el.classList.add('active');
+                setTimeout(() => {
+                    closeGamemodes();
+                    menuInteraction();
+                    reset();
+                }, 1000);
+                normal();
+            }
 
-                if (el.classList.contains('active')) {
-                    warning.innerText = 'Normal already selected';
-                    closeGamemodesBtn.style.display = 'block';
-                    closeGamemodesBtn.addEventListener('click', () => {
-                        closeGamemodes();
-                        warning.innerText = '';
-                    })
-                } else {
-                    mode.forEach(e => e.classList.remove('active'));
-                    el.classList.add('active');
-                    el.classList.add('clicked');
-                    setTimeout(() => {
-                        closeGamemodes();
-                        menuInteraction();
-                    }, 1000);
-                    normal();
+        });
+
+
+        (function explanationFunc() {
+            openExplanation.onclick = () => {
+                gamemodesBtn.style.display = 'none';
+                openExplanation.style.display = 'none';
+                explanation.style.maxWidth = '500px';
+                explanationBox.style.display = 'block';
+                kingDiceExplanation.setAttribute('src', 'assets/images/kingDiceTalking.png')
+            }
+
+            closeExplanation.onclick = () => {
+                explanation.style.right = ('-80px')
+                explanation.style.transition = ('none')
+                kingDiceExplanation.setAttribute('src', 'assets/images/kingDiceDisappearing.gif')
+                explanationBox.style.display = 'none';
+                setTimeout(() => {
+                    explanation.removeAttribute('style');
+                    explanation.style.transition = 'none';
+                    explanation.style.transform = 'translateX(200%)';
+                    kingDiceExplanation.setAttribute('src', "assets/images/kingDice'sExplanation.png")
+                    menuInteraction();
+                }, 2000);
+            }
+        })();
+
+        (function setPlayersName() {
+            const p1Form = document.querySelector('#p1Form');
+            const p2Form = document.querySelector('#p2Form');
+            const editP1 = document.querySelector('#pencil1');
+            const editP2 = document.querySelector('#pencil2');
+            const p1info = document.querySelector('#p1info');
+            const p2info = document.querySelector('#p2info');
+            const p1Name = document.querySelector('#p1Name');
+            const p2Name = document.querySelector('#p2Name');
+
+            editP1.addEventListener('click', () => {
+                p1info.style.display = 'none';
+                p1Form.style.display = 'block';
+            })
+
+            editP2.addEventListener('click', () => {
+                p2info.style.display = 'none';
+                p2Form.style.display = 'block';
+
+            })
+
+            p1Form.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const el = e.target
+
+                function setP1Name() {
+                    const name1 = document.querySelector('#name1').value;
+                    p1Name.innerText = name1;
                 }
-            }
+                setP1Name();
 
-        })
+                if (el.classList.contains('editPlayer')) {
+                    p1info.style.display = 'flex';
+                    p1Form.style.display = 'none';
+                }
+            })
 
-    })();
+            p2Form.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const el = e.target
 
+                function setP2Name() {
+                    const name2 = document.querySelector('#name2').value;
+                    p2Name.innerText = name2;
+                }
+                setP2Name();
 
-    (function explanationFunc() {
-        openExplanation.onclick = () => {
-            gamemodesBtn.style.display = 'none';
-            openExplanation.style.display = 'none';
-            explanation.style.maxWidth = '500px';
-            explanationBox.style.display = 'block';
-            kingDiceExplanation.setAttribute('src', 'assets/images/kingDiceTalking.png')
-        }
-
-        closeExplanation.onclick = () => {
-            explanation.style.right = ('-80px')
-            explanation.style.transition = ('none')
-            kingDiceExplanation.setAttribute('src', 'assets/images/kingDiceDisappearing.gif')
-            explanationBox.style.display = 'none';
-            setTimeout(() => {
-                explanation.removeAttribute('style');
-                explanation.style.transition = 'none';
-                explanation.style.transform = 'translateX(200%)';
-                kingDiceExplanation.setAttribute('src', "assets/images/kingDice'sExplanation.png")
-                menuInteraction();
-            }, 2000);
-        }
-    })();
-
-    (function setPlayersName() {
-        const p1Form = document.querySelector('#p1Form');
-        const p2Form = document.querySelector('#p2Form');
-        const editP1 = document.querySelector('#pencil1');
-        const editP2 = document.querySelector('#pencil2');
-        const p1info = document.querySelector('#p1info');
-        const p2info = document.querySelector('#p2info');
-        const p1Name = document.querySelector('#p1Name');
-        const p2Name = document.querySelector('#p2Name');
-
-        editP1.addEventListener('click', () => {
-            p1info.style.display = 'none';
-            p1Form.style.display = 'block';
-        })
-
-        editP2.addEventListener('click', () => {
-            p2info.style.display = 'none';
-            p2Form.style.display = 'block';
-
-        })
-
-        p1Form.addEventListener('submit', (e) => {
-            e.preventDefault();
-            const el = e.target
-
-            function setP1Name() {
-                const name1 = document.querySelector('#name1').value;
-                p1Name.innerText = name1;
-            }
-            setP1Name();
-
-            if (el.classList.contains('editPlayer')) {
-                p1info.style.display = 'flex';
-                p1Form.style.display = 'none';
-            }
-        })
-
-        p2Form.addEventListener('submit', (e) => {
-            e.preventDefault();
-            const el = e.target
-
-            function setP2Name() {
-                const name2 = document.querySelector('#name2').value;
-                p2Name.innerText = name2;
-            }
-            setP2Name();
-
-            if (el.classList.contains('editPlayer')) {
-                p2info.style.display = 'flex';
-                p2Form.style.display = 'none';
-            }
-        })
-    })();
-
-    // GAME SCRIPT
-
-    function randomDice() {
-        let diceRandom1 = Math.random() * (6 - 1) + 1;
-        let diceRandom2 = Math.random() * (6 - 1) + 1;
-        diceRandom1 = Math.round(diceRandom1);
-        diceRandom2 = Math.round(diceRandom2);
-        const diceValues = [diceRandom1, diceRandom2];
-        return diceValues;
-    }
-
-    function setDice(diceValues) {
-        const dice1 = document.querySelector('.img1');
-        const dice2 = document.querySelector('.img2');
-
-        (function setDiceOne() {
-            if (diceValues[0] === 1) {
-                dice1.setAttribute('src', 'assets/images/dice1.png')
-            } else if (diceValues[0] === 2) {
-                dice1.setAttribute('src', 'assets/images/dice2.png')
-            } else if (diceValues[0] === 3) {
-                dice1.setAttribute('src', 'assets/images/dice3.png')
-            } else if (diceValues[0] === 4) {
-                dice1.setAttribute('src', 'assets/images/dice4.png')
-            } else if (diceValues[0] === 5) {
-                dice1.setAttribute('src', 'assets/images/dice5.png')
-            } else if (diceValues[0] === 6) {
-                dice1.setAttribute('src', 'assets/images/dice6.png')
-            }
+                if (el.classList.contains('editPlayer')) {
+                    p2info.style.display = 'flex';
+                    p2Form.style.display = 'none';
+                }
+            })
         })();
 
-        (function setDiceTwo() {
-            if (diceValues[1] === 1) {
-                dice2.setAttribute('src', 'assets/images/dice1.png')
-            } else if (diceValues[1] === 2) {
-                dice2.setAttribute('src', 'assets/images/dice2.png')
-            } else if (diceValues[1] === 3) {
-                dice2.setAttribute('src', 'assets/images/dice3.png')
-            } else if (diceValues[1] === 4) {
-                dice2.setAttribute('src', 'assets/images/dice4.png')
-            } else if (diceValues[1] === 5) {
-                dice2.setAttribute('src', 'assets/images/dice5.png')
-            } else if (diceValues[1] === 6) {
-                dice2.setAttribute('src', 'assets/images/dice6.png')
-            }
-        })();
-    }
-}
+        // GAME SCRIPT
 
-function winner(id, mode, showPoints) {
-    const playerWinner = document.querySelector('.winner');
-    let name1 = document.querySelector('#name1').value;
-    let name2 = document.querySelector('#name2').value
-    if (name1 == '') {
-        name1 = 'Player 1';
-    }
+        function randomDice() {
+            let diceRandom1 = Math.random() * (6 - 1) + 1;
+            let diceRandom2 = Math.random() * (6 - 1) + 1;
+            diceRandom1 = Math.round(diceRandom1);
+            diceRandom2 = Math.round(diceRandom2);
+            const diceValues = [diceRandom1, diceRandom2];
+            return diceValues;
+        }
 
-    if (name2 == '') {
-        name2 = 'Player 2';
-    }
+        function setDice(diceValues) {
+            const dice1 = document.querySelector('.img1');
+            const dice2 = document.querySelector('.img2');
 
-    if (mode === 'free') {
-        if (id === 'p1') return `${name1} Won`;
-        else if (id === 'p2') return `${name2} Won`;
-        else return "A tie! Roll Again";
-    }
-    else if (mode === 3) {
-        if (showPoints === true) {
-            playerWinner.style.fontSize = '5rem';
-            if (id === 'p1') return `${name1} won a point`;
-            else if (id === 'p2') return `${name2} won a point`;
+            (function setDiceOne() {
+                if (diceValues[0] === 1) {
+                    dice1.setAttribute('src', 'assets/images/dice1.png')
+                } else if (diceValues[0] === 2) {
+                    dice1.setAttribute('src', 'assets/images/dice2.png')
+                } else if (diceValues[0] === 3) {
+                    dice1.setAttribute('src', 'assets/images/dice3.png')
+                } else if (diceValues[0] === 4) {
+                    dice1.setAttribute('src', 'assets/images/dice4.png')
+                } else if (diceValues[0] === 5) {
+                    dice1.setAttribute('src', 'assets/images/dice5.png')
+                } else if (diceValues[0] === 6) {
+                    dice1.setAttribute('src', 'assets/images/dice6.png')
+                }
+            })();
+
+            (function setDiceTwo() {
+                if (diceValues[1] === 1) {
+                    dice2.setAttribute('src', 'assets/images/dice1.png')
+                } else if (diceValues[1] === 2) {
+                    dice2.setAttribute('src', 'assets/images/dice2.png')
+                } else if (diceValues[1] === 3) {
+                    dice2.setAttribute('src', 'assets/images/dice3.png')
+                } else if (diceValues[1] === 4) {
+                    dice2.setAttribute('src', 'assets/images/dice4.png')
+                } else if (diceValues[1] === 5) {
+                    dice2.setAttribute('src', 'assets/images/dice5.png')
+                } else if (diceValues[1] === 6) {
+                    dice2.setAttribute('src', 'assets/images/dice6.png')
+                }
+            })();
+        }
+    })();
+
+    function winner(id, mode, showPoints) {
+        const playerWinner = document.querySelector('.winner');
+        let name1 = document.querySelector('#name1').value;
+        let name2 = document.querySelector('#name2').value
+        if (name1 == '') {
+            name1 = 'Player 1';
+        }
+
+        if (name2 == '') {
+            name2 = 'Player 2';
+        }
+
+        if (mode === 'free') {
+            if (id === 'p1') return `${name1} Won`;
+            else if (id === 'p2') return `${name2} Won`;
             else return "A tie! Roll Again";
         }
-    }
-
-    playerWinner.style.fontSize = '8rem';
-    if (id === 'p1') return `${name1} <span class="behind">Won</span>`;
-    else if (id === 'p2') return `<span class="behind">${name2.slice(0, 5)}</span>${name2.slice(5)} Won`;
-}
-
-function setIdWinner(diceValues, mode, scoreP1, scoreP2) {
-    if (mode === 3) {
-        if (scoreP1 > scoreP2) {
-            return 'p1';
+        else if (mode === 3) {
+            if (showPoints === true) {
+                playerWinner.style.fontSize = '5rem';
+                if (id === 'p1') return `${name1} won a point`;
+                else if (id === 'p2') return `${name2} won a point`;
+                else return "A tie! Roll Again";
+            }
         }
-        else if (scoreP2 > scoreP1) {
-            return 'p2';
+
+        playerWinner.style.fontSize = '8rem';
+        if (id === 'p1') return `${name1} <span class="behind">Won</span>`;
+        else if (id === 'p2') return `<span class="behind">${name2.slice(0, 5)}</span>${name2.slice(5)} Won`;
+    }
+
+    function setIdWinner(diceValues, mode, scoreP1, scoreP2) {
+        if (mode === 3) {
+            if (scoreP1 > scoreP2) {
+                return 'p1';
+            }
+            else if (scoreP2 > scoreP1) {
+                return 'p2';
+            }
+        }
+
+        if (mode === 'free') {
+            if (diceValues[0] > diceValues[1]) {
+                return 'p1';
+            }
+            else if (diceValues[1] > diceValues[0]) {
+                return 'p2';
+            }
         }
     }
 
-    if (mode === 'free') {
-        if (diceValues[0] > diceValues[1]) {
-            return 'p1';
+    function setCharacter(winner) {
+        const cuphead = document.querySelector('#cuphead');
+        const mugman = document.querySelector('#mugman');
+        const mrKDice = document.querySelector('#kingDice');
+
+        if (winner === 'p1') {
+            cuphead.setAttribute('src', 'assets/images/cuphead.png');
+            mugman.setAttribute('src', 'assets/images/mugmanSoul.png');
+            mrKDice.setAttribute('src', "assets/images/kingDiceWon1.png")
         }
-        else if (diceValues[1] > diceValues[0]) {
-            return 'p2';
+        else if (winner === 'p2') {
+            mugman.setAttribute('src', 'assets/images/mugman.png');
+            cuphead.setAttribute('src', 'assets/images/cupheadSoul.png');
+            mrKDice.setAttribute('src', "assets/images/kingDiceWon2.png");
+        }
+        else {
+            cuphead.setAttribute('src', 'assets/images/cuphead.png');
+            mugman.setAttribute('src', 'assets/images/mugman.png');
         }
     }
-}
 
-function setCharacter(winner) {
-    const cuphead = document.querySelector('#cuphead');
-    const mugman = document.querySelector('#mugman');
-    const mrKDice = document.querySelector('#kingDice');
 
-    if (winner === 'p1') {
-        cuphead.setAttribute('src', 'assets/images/cuphead.png');
-        mugman.setAttribute('src', 'assets/images/mugmanSoul.png');
-        mrKDice.setAttribute('src', "assets/images/kingDiceWon1.png")
+    function setWinner(winner) {
+        const playerWinner = document.querySelector('.winner');
+        playerWinner.innerHTML = winner;
     }
-    else if (winner === 'p2') {
-        mugman.setAttribute('src', 'assets/images/mugman.png');
-        cuphead.setAttribute('src', 'assets/images/cupheadSoul.png');
-        mrKDice.setAttribute('src', "assets/images/kingDiceWon2.png");
-    }
-    else {
-        cuphead.setAttribute('src', 'assets/images/cuphead.png');
-        mugman.setAttribute('src', 'assets/images/mugman.png');
-    }
-}
-
-
-function setWinner(winner) {
-    const playerWinner = document.querySelector('.winner');
-    playerWinner.innerHTML = winner;
 }
 theDiceGame()

@@ -297,6 +297,10 @@ input {
   font-size: 1.05rem;
 }
 
+.refresh {
+  display: none;
+}
+
 .active {
   background: #3d40a7;
   border: 1px solid;
