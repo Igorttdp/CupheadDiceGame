@@ -52,23 +52,6 @@ function theDiceGame() {
         scoreContainer.style.transform = 'translateX(0)';
     }
 
-    (function setScoreNames() {
-        const p1ScoreName = document.querySelector('#tableP1Name');
-        const p2ScoreName = document.querySelector('#TableP2Name');
-        let name1 = document.querySelector('#name1').value;
-        let name2 = document.querySelector('#name2').value
-        if (name1 == '') {
-            name1 = 'Player 1';
-        }
-
-        if (name2 == '') {
-            name2 = 'Player 2';
-        }
-
-        p1ScoreName.innerText = name1;
-        p2ScoreName.innerText = name2;
-    })();
-
     (function gamemode() {
         function openGamemodes() {
             btnsDiv.style.display = 'none';
@@ -471,7 +454,13 @@ function theDiceGame() {
 
                 function setP1Name() {
                     const name1 = document.querySelector('#name1').value;
+                    const p1ScoreName = document.querySelector('#tableP1Name');
+                    if (name1 == '') {
+                        name1 = 'Player 1';
+                    }
+
                     p1Name.innerText = name1;
+                    p1ScoreName.innerText = name1;
                 }
                 setP1Name();
 
@@ -487,7 +476,13 @@ function theDiceGame() {
 
                 function setP2Name() {
                     const name2 = document.querySelector('#name2').value;
+                    const p2ScoreName = document.querySelector('#tableP2Name');
+                    if (name2 == '') {
+                        name2 = 'Player 2';
+                    }
+
                     p2Name.innerText = name2;
+                    p2ScoreName.innerText = name2;
                 }
                 setP2Name();
 
