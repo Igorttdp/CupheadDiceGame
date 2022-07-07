@@ -226,6 +226,7 @@ input {
 }
 
 #explanationBox p {
+  position: relative;
   font-size: 1.1rem;
   margin: 0;
 }
@@ -263,7 +264,8 @@ input {
   font-size: 1.1rem;
   border: none;
   position: absolute;
-  left: 0px;
+  left: -10px;
+  top: -15px;
   padding: 0;
   background: transparent;
 }
@@ -339,4 +341,3 @@ input {
 #kingDiceHead {
   width: 100px;
 }
-
