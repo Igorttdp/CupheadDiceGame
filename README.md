@@ -5,5 +5,5 @@
 <p>The project initially proposed was a simple game of dice. I decided to do it my way. To randomize the dices I used Math.random() with the logic necessary to generate numbers between 1 and 6. Through the DOM, the dice numbers are associated with the "src" attribute of the image and changed when the "Roll the dice" button is clicked. To check the winner, a function with an if statement is called to determine which dice has the highest value. In the case of the best 3 or 5 game mode, a score table is started to count the scores of player 1 and 2. The player with the highest score wins.</p>
 
 <h3>Preview</h3>
-<video src="assets/video/preview.mp4"></video>
+<img alt="Preview" src = "assets/images/preview.gif">
 <p>A small preview to show some features.</p>
